@@ -3,7 +3,7 @@ export const render3DAlbum = (projectName) => {
     "https://cdn.jsdelivr.net/gh/nils-keller-dev/cdn-resources/images/";
 
   document.querySelectorAll("div").forEach((el) => {
-    el.style.backgroundImage = `url(${BASE_URL}${projectName}/${el.classList[0]}.webp)`;
+    el.style.backgroundImage = `url(${BASE_URL}${projectName}/${el.id}.webp)`;
     el.style.translate = `0 0 ${el.innerHTML}em`;
   });
 
