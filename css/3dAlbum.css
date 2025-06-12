@@ -8,6 +8,7 @@ html {
 	perspective: 100em;
 	user-select: none;
 	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -19,7 +20,6 @@ body {
 	transform-style: preserve-3d;
 	transition: transform 0.5s ease;
 	animation: move 10s infinite;
-	-webkit-tap-highlight-color: transparent;
 }
 
 div {
@@ -31,11 +31,28 @@ div {
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+body > div {
+	translate: 0 0 var(--depth);
+	background-image: var(--image);
 	transition: translate 0.5s ease;
 }
 
-body.disabled div {
-	translate: 0 0 0 !important;
+body.disabled > div {
+	--depth: 0 !important;
+}
+
+.shadow {
+	mask-size: contain;
+	transition: all 0.5s ease;
+	opacity: 0.4;
+	filter: blur(var(--blur)) brightness(0) !important;
+	mask-image: var(--image);
+}
+
+body.disabled .shadow {
+	opacity: 0;
 }
 
 @keyframes move {
