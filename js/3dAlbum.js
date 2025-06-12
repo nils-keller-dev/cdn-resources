@@ -16,22 +16,26 @@ export const render3DAlbum = (projectName) => {
 		el.style.setProperty("--image", generateImageUrl(el.id));
 		el.style.setProperty("--depth", `${depth}em`);
 
-		if (images.at(-1)?.depth > depth) {
-			images.forEach(({ name, depth: previousDepth }) => {
-				const shadowEl = shadowTemplate.cloneNode();
-				shadowEl.style.backgroundImage = generateImageUrl(name);
-				shadowEl.style.setProperty("--blur", `${(previousDepth - depth) / 10}em`);
-				el.appendChild(shadowEl);
-			});
+		if (!el.classList.contains("r")) {
+			images
+				.filter((i) => i.depth > depth)
+				.forEach(({ name, depth: previousDepth }) => {
+					const shadowEl = shadowTemplate.cloneNode();
+					shadowEl.style.backgroundImage = generateImageUrl(name);
+					shadowEl.style.setProperty("--blur", `${(previousDepth - depth) / 10}em`);
+					el.appendChild(shadowEl);
+				});
 		}
 
-		images.push({
-			name: el.id,
-			depth
-		});
+		el.classList.contains("t") ||
+			images.push({
+				name: el.id,
+				depth
+			});
 	}
 
 	document.addEventListener("click", () =>
 		document.body.classList.toggle("disabled")
 	);
 };
+
