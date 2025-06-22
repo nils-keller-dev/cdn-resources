@@ -52,7 +52,7 @@ body.disabled > div {
 }
 
 body.disabled .shadow {
-	opacity: 0;
+	--blur: 0 !important;
 }
 
 @keyframes move {
